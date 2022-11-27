@@ -46,7 +46,7 @@ class Pendulum {
       let diffx = this.mx - this.x1;
       let diffy = this.my - this.y1;
       console.log(diffy);
-      this.angle = Math.atan2(-1 * diffx, diffy) - this.degrees_to_radians(5);
+      this.angle = Math.atan2(diffx, diffy) - this.degrees_to_radians(5);
       console.log(this.angle); // angulo relativo (vertical)
     }
   }
@@ -61,7 +61,7 @@ class Pendulum {
     this.dragging = false;
   }
 
-  show(ctx) {
+  show(ctx, callback) {
     this.x2 = this.length * Math.sin(this.angle) + this.x1;
     this.y2 = this.length * Math.cos(this.angle) + this.y1;
     //console.log("show", this.angle);
@@ -70,7 +70,7 @@ class Pendulum {
     ctx.lineTo(this.x2 + 2, this.y2 - 10);
     ctx.lineWidth = 2.5;
     //ctx.arc(x1, y1, 50, 0, 2 * Math.PI);
-    ctx.strokeStyle = "rgba(240, 108, 0)";
+    ctx.strokeStyle = "rgba(67, 2, 3)";
     ctx.stroke();
     ctx.closePath();
     ctx.beginPath();
@@ -85,9 +85,10 @@ class Pendulum {
     ctx.beginPath();
     ctx.arc(this.x2, this.y2 + 60, 40, 0, 2 * Math.PI);
     ctx.lineWidth = 30;
-    ctx.fillStyle = "rgba(239, 81, 105)";
+    ctx.fillStyle = "rgba(224, 37, 38)";
     ctx.fill();
     ctx.closePath();
-    drawcircle(this.x2, this.y2, ctx);
+    //drawcircle(this.x2, this.y2, ctx);
+    callback(this.x2, this.y2, ctx);
   }
 }

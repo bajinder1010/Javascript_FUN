@@ -40,9 +40,41 @@ for (let i = 10; i <= window.innerWidth; i += 150) {
 function drawcircle(x2, y2, ctx) {
   ctx.beginPath();
   ctx.arc(x2, y2 + 60, 10, 0, 2 * Math.PI);
-  ctx.fillStyle = "rgba(100, 20, 30)";
+  ctx.fillStyle = "rgba(252, 172, 0)";
   ctx.fill();
   ctx.closePath();
+}
+
+function drawTriangle(x2, y2, ctx) {
+  let height = y2 * Math.cos(Math.PI / 6);
+
+  ctx.beginPath();
+  ctx.moveTo(x2 - 10, y2 + 50);
+  ctx.lineTo(x2 + 10, y2 + 50);
+  ctx.lineTo(x2, y2 + 40);
+
+  ctx.moveTo(x2 - 10, y2 + 60);
+  ctx.lineTo(x2 + 10, y2 + 60);
+  ctx.lineTo(x2, y2 + 50);
+
+  ctx.moveTo(x2 - 10, y2 + 70);
+  ctx.lineTo(x2 + 10, y2 + 70);
+  ctx.lineTo(x2, y2 + 60);
+
+  ctx.closePath();
+
+  // the outline
+  ctx.lineWidth = 2;
+  ctx.strokeStyle = "#7CA621";
+  ctx.stroke();
+
+  // the fill color
+  ctx.fillStyle = "#7CA621";
+  ctx.fill();
+  ctx.beginPath();
+  ctx.fillStyle = "#420000";
+  ctx.fill();
+  ctx.fillRect(x2 - 3, y2 + 71, 6, 12);
 }
 
 function drawCharacter(x2, y2, ctx, chr) {
@@ -57,7 +89,8 @@ function animate(ctx, width, height) {
   for (let i = 10; i <= width; i += 150) {
     objs[i].update();
     objs[i].drag();
-    objs[i].show(ctx);
+    if (i % 4 === 0) objs[i].show(ctx, drawcircle);
+    else objs[i].show(ctx, drawTriangle);
   }
 
   //drawBauble(150, 0, angle);
