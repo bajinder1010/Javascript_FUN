@@ -38,16 +38,13 @@ class Pendulum {
   }
 
   drag() {
-    // mientras se sostiene el pendulo
-    // calcular angulo entre
-    // origen y mouse
     if (this.dragging) {
       console.log("drag", this.dragging);
       let diffx = this.mx - this.x1;
       let diffy = this.my - this.y1;
       console.log(diffy);
       this.angle = Math.atan2(diffx, diffy) - this.degrees_to_radians(5);
-      console.log(this.angle); // angulo relativo (vertical)
+      console.log(this.angle);
     }
   }
 
@@ -57,7 +54,7 @@ class Pendulum {
   }
 
   stopDragging() {
-    this.angleV = 0; // velocidad es 0 al soltarlo
+    this.angleV = 0; 
     this.dragging = false;
   }
 
